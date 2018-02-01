@@ -1,0 +1,142 @@
+﻿@model helpdesk.ViewModels.OrderDetailsViewModel
+
+@{
+    int orderId = Model.Order.OrderId;
+}
+
+@{
+    ViewBag.Title = "Zgłoszenie nr " + orderId;
+}
+
+
+<h2>Zgłoszenie nr @orderId</h2>
+
+<table class="table table-responsive">
+    <thead class="thead-default">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.TimeCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.TimeClosed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.Urgent)
+            </th>
+        </tr>
+    </thead>
+    @{
+        string rowTheme = "table-light";
+        if (Model.Order.Urgent)
+        {
+            rowTheme = "table-danger";
+        }
+    }
+    <tr class="@rowTheme">
+        <td>
+            @Html.DisplayFor(model => model.Order.Category.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Order.Status.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Order.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Order.TimeCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Order.TimeClosed)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Order.Urgent)
+        </td>
+        </trclass="@rowTheme">
+</table>
+<dt>
+    @Html.DisplayNameFor(model => model.Order.Content)
+</dt>
+<div class="card">
+    <div class="card-body">
+        @Html.DisplayFor(model => model.Order.Content)
+    </div>
+</div>
+
+<p></p>
+
+<table class="table table-sm table-responsive-sm table-striped">
+    <thead class="thead-default">
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Czas
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Treść
+            </th>
+        </tr>
+    </thead>
+    @{
+        int i = 1;
+        foreach (var item in Model.OrderComments)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.StatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                <td>
+            </tr>
+            i++;
+        }
+    }
+</table>
+
+
+@Html.ActionLink("Powrót", "Index", null, htmlAttributes: new { @class = "btn btn-outline-primary" })
+
+@{
+    if (Model.Order.Status.StatusName != "zamknięte" && Model.Order.Status.StatusName != "anulowane")
+    {
+        @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-outline-dark" })
+        @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-outline-danger" })
+
+    }
+    else
+    {
+        if (!ViewBag.isAdmin)
+        {
+            @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-light disabled" })
+            @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-light disabled" })
+        }
+        else
+        {
+            @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-outline-dark" })
+            @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-outline-danger" })
+        }
+    }
+
+}
+
+
