@@ -17,7 +17,7 @@ namespace helpdesk.Controllers
         private helpdeskContext db = new helpdeskContext();
 
         // GET: Orders
-        public ActionResult Index(int? page, int? StatusId, int? CategoryId)
+        public ActionResult Index(int? page, int? StatusId, int? CategoryId, string Query)
         {
             ViewBag.StatusId = new SelectList(db.Status, "StatusId", "StatusName");
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -35,6 +35,11 @@ namespace helpdesk.Controllers
             else
             {
                 orders = db.Orders.Where(o => o.UserName == username).Include(o => o.Category);
+            }
+
+            if (!String.IsNullOrEmpty(Query))
+            {
+                orders = orders.Where(s => s.Content.Contains(Query));
             }
 
             if (StatusId > 0)

@@ -300,6 +300,7 @@
     <Content Include="Views\Orders\Cancel.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\OrderComments\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

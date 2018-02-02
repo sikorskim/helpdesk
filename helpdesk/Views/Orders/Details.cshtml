@@ -113,30 +113,21 @@
     }
 </table>
 
-
 @Html.ActionLink("Powrót", "Index", null, htmlAttributes: new { @class = "btn btn-outline-primary" })
-
 @{
-    if (Model.Order.Status.StatusName != "zamknięte" && Model.Order.Status.StatusName != "anulowane")
-    {
-        @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-outline-dark" })
-        @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-outline-danger" })
-
-    }
-    else
-    {
-        if (!ViewBag.isAdmin)
+        if (Model.Order.Status.StatusName != "zamknięte" && Model.Order.Status.StatusName != "anulowane")
         {
-            @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-light disabled" })
-            @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-light disabled" })
+        @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-outline-danger" })
+        @Html.ActionLink("Dodaj komentarz", "AddComment", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-outline-success ml-1" })
         }
         else
         {
-            @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-outline-dark" })
-            @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-outline-danger" })
+        @Html.ActionLink("Anuluj zgłoszenie", "Cancel", "Orders", new { id = @orderId }, htmlAttributes: new { @class = "btn btn-light disabled" })
+        @Html.ActionLink("Dodaj komentarz", "AddComment", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-light disabled ml-1" })
         }
-    }
-
+        if (ViewBag.isAdmin)
+        {
+        @Html.ActionLink("Zmień status", "Create", "OrderComments", new { orderId = @orderId }, htmlAttributes: new { @class = "btn btn-outline-warning ml-1" })
+        }
 }
-
 

@@ -83,6 +83,45 @@ namespace helpdesk.Controllers
             return View(orderComment);
         }
 
+        // GET: OrderComments/AddComment
+        public ActionResult AddComment(int? orderId)
+        {
+            if (orderId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OrderComment orderComment = new OrderComment();
+            orderComment.OrderId = (int)orderId;
+
+            if (orderComment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(orderComment);
+        }
+
+        // POST: OrderComments/AddComment
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment([Bind(Include = "OrderCommentId,Text,OrderId")] OrderComment orderComment)
+        {
+            if (ModelState.IsValid)
+            {                
+                Order order = db.Orders.Find(orderComment.OrderId);
+                orderComment.Time = DateTime.Now;
+                orderComment.Status = order.Status;
+                orderComment.Order = order;
+                db.OrderComment.Add(orderComment);
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", "Orders", new { Id = orderComment.OrderId });
+            }
+            return View(orderComment);
+        }
+
+
         // GET: OrderComments/Edit/5
         public ActionResult Edit(int? id)
         {

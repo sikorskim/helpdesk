@@ -11,12 +11,13 @@
     @Html.ActionLink("Utwórz nowe", "Create", null, htmlAttributes: new { @class = "btn btn-outline-success" })
 
     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseBody" aria-expanded="false" aria-controls="collapseBody">
-        Filtr
+        Wyszukaj
     </button>
     <div class="collapse" id="collapseBody">
-        <div class="card card-body border-primary mb-3">
+        <div class="card card-body border-primary mb-3 bg-light">
             @using (Html.BeginForm("Index", "Orders", FormMethod.Get))
             {
+            <div class="form-inline">
                 <div class="form-group">
                     @Html.Label("Kategoria", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
@@ -30,16 +31,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Filtruj" class="btn btn-outline-primary" />
+                    <div class="form-group">
+                        @Html.Editor("Query", new { htmlAttributes = new { @class = "form-control", @placeholder = "Szukaj w treści" } })
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Wyszukaj" class="btn btn-outline-primary" />
+                    </div>
+                </div>
+            </div>
             }
         </div>
     </div>
-
-
-
 
     <table class="table table-responsive table-hover">
         <thead class="thead-light">
@@ -128,4 +132,4 @@
     Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("Index",
-                                  new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                                        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
