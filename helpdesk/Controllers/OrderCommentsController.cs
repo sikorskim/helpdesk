@@ -66,12 +66,18 @@ namespace helpdesk.Controllers
             {
                 Status status = db.Status.Find(StatusId);
                 Order order = db.Orders.Find(orderComment.OrderId);
-                order.Status = db.Status.Find(StatusId);
+                order.Status = status;
+                
                 if (status == db.Status.Single(s => s.StatusName == "zamknięte"))
                 {
                     order.TimeClosed = DateTime.Now;
                 }
+                else
+                {
+                    order.TimeClosed = null;
+                }
 
+                orderComment.Username = getUserName();
                 orderComment.Time = DateTime.Now;
                 orderComment.Status = status;
                 orderComment.Order = order;
@@ -81,6 +87,11 @@ namespace helpdesk.Controllers
                 return RedirectToAction("Details", "Orders", new { Id = orderComment.OrderId });
             }
             return View(orderComment);
+        }
+
+        string getUserName()
+        {
+            return User.Identity.Name.ToLower();
         }
 
         // GET: OrderComments/AddComment
@@ -113,8 +124,9 @@ namespace helpdesk.Controllers
                 orderComment.Time = DateTime.Now;
                 orderComment.Status = order.Status;
                 orderComment.Order = order;
+                orderComment.Username = getUserName();
                 db.OrderComment.Add(orderComment);
-                db.Entry(order).State = EntityState.Modified;
+              //  db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "Orders", new { Id = orderComment.OrderId });
             }

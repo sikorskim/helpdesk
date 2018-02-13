@@ -86,6 +86,9 @@
                 Status
             </th>
             <th>
+                Użytkownik
+            </th>
+            <th>
                 Treść
             </th>
         </tr>
@@ -94,20 +97,23 @@
         int i = 1;
         foreach (var item in Model.OrderComments)
         {
-            <tr>
-                <td>
-                    @i
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status.StatusName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Text)
-                <td>
-            </tr>
+    <tr>
+        <td>
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        <td>
+    </tr>
             i++;
         }
     }

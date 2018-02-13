@@ -62,6 +62,13 @@ namespace helpdesk.Controllers
             return View(ordersPaged);
         }
 
+        // GET: Orders
+        public ActionResult ReportIndex()
+        {
+
+            return View();
+        }
+
         string getUserName()
         {
             return User.Identity.Name.ToLower();
