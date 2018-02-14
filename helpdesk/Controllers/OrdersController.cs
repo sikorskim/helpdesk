@@ -65,7 +65,11 @@ namespace helpdesk.Controllers
         // GET: Orders
         public ActionResult ReportIndex()
         {
+            DateTime start = DateTime.Parse("2017-01-01");
+            DateTime end = DateTime.Now;
 
+            Report report = new Report(start,end);
+            ViewBag.Summary = report.OrderSummary();
             return View();
         }
 

@@ -1,0 +1,36 @@
+﻿@model PagedList.IPagedList<helpdesk.Models.Order>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Raporty";
+}
+
+@{ var items = this.ViewBag.Summary as Dictionary<string, string>; }
+
+<table class="table table-responsive table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                Key
+            </th>
+            <th>
+                Value
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in items)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+        </tr>
+    }
+
+</table>

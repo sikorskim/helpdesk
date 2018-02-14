@@ -8,7 +8,7 @@ namespace helpdesk.Models
     public class Report
     {
         public string Name { get; private set; }
-        public List<ReportItem> Items { get; private set; }
+        public Dictionary<string, string> Items { get; private set; }
         public string Summary { get; private set; }
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
@@ -20,22 +20,20 @@ namespace helpdesk.Models
         {
             Start = start;
             End = end;
-            Items = new List<ReportItem>();
+            Items = new Dictionary<string, string>();
         }
 
         public Report()
-        {
-            Items = new List<ReportItem>();
-        }
+        {}
 
-        public Report OrderSummary()
+        public Dictionary<string,string> OrderSummary()
         {
             Name = "Ilość zgłoszeń w wybranym okresie";
             string key0 = "Ilość zgłoszeń utworzonych";
-            string value0 = db.Orders.Where(p => p.TimeCreated >= Start && p.TimeClosed <= End).Count().ToString();
-            ReportItem reportItem = new ReportItem(key0, value0);
-            Items.Add(reportItem);
-            return this;
+            string value0 = db.Orders.Where(p => p.TimeCreated >= Start && p.TimeCreated <= End).Count().ToString();
+            
+            Items.Add(key0,value0);
+            return Items;
         }
     }
 }
