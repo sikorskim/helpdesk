@@ -23,9 +23,9 @@ namespace helpdesk.Controllers
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
 
             string username = getUserName();
+            visitCount();
             bool isAdmin = checkCredentials(username);
             ViewBag.isAdmin = isAdmin;
-            visitCount();
 
             IQueryable<Order> orders =null;
             if (isAdmin)
@@ -81,10 +81,17 @@ namespace helpdesk.Controllers
         bool checkCredentials(string username)
         {
             bool isAdmin = false;
-            AppUser user = db.AppUser.Include(p => p.Credential).Single(p => p.Username == username);
-            if (user.Credential.CredentialId==1)
+            try
             {
-                isAdmin = true;
+                AppUser user = db.AppUser.Include(p => p.Credential).Single(p => p.Username == username);
+                if (user.Credential.CredentialId == 1)
+                {
+                    isAdmin = true;
+                }
+            }
+            catch (Exception)
+            {
+                isAdmin = false;
             }
             return isAdmin;
         }

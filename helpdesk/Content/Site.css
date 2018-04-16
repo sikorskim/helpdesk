@@ -26,3 +26,24 @@ textarea {
 input.wide-control {
     width: 300px;
 }
+
+.custom-form .form-control {
+    margin-bottom: 5px
+}
+
+.custom-form .btn .fa {
+    line-height: 0px
+}
+
+    .custom-form .form-control {
+        display: inline-block;
+        width: auto;
+        margin: 0;
+    }
+
+    .custom-form .form-group {
+        display: inline-block;
+        width: auto;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
