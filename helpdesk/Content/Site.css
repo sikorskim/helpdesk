@@ -27,6 +27,8 @@ input.wide-control {
     width: 300px;
 }
 
+
+/* settings for IE11 form-inline compability */
 .custom-form .form-control {
     margin-bottom: 5px
 }
