@@ -8,17 +8,7 @@
 
 @{ var items = this.ViewBag.Summary as Dictionary<string, string>; }
 
-<table class="table table-responsive table-hover">
-    <thead class="thead-light">
-        <tr>
-            <th>
-                Key
-            </th>
-            <th>
-                Value
-            </th>
-        </tr>
-    </thead>
+<table class="table table-responsive">
 
     @foreach (var item in items)
     {
