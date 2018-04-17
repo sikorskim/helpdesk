@@ -70,6 +70,8 @@ namespace helpdesk.Controllers
 
             Report report = new Report(start,end);
             ViewBag.Summary = report.OrderSummary();
+            ViewBag.OrdersByStatus = report.OrdersByStatus();
+            ViewBag.OrdersByCategory = report.OrdersByCategory();
             return View();
         }
 

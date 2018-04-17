@@ -33,8 +33,10 @@ namespace helpdesk.Models
         public virtual Status Status { get; set; }
 
         [DisplayName("Treść skrót")]
-        public virtual string ContentShort {
-            get {
+        public virtual string ContentShort
+        {
+            get
+            {
                 string shortcut;
                 if (Content.Length < 30)
                 {
@@ -45,6 +47,34 @@ namespace helpdesk.Models
                     shortcut = Content.Substring(0, 30) + "...";
                 }
                 return shortcut;
-            } }
+            }
+        }
+
+        [DisplayName("Czas obsługi")]
+        public virtual string ServiceTime
+        {
+            get
+            {
+                return getTimeStampString();
+            }
+        }
+
+        string getTimeStampString()
+        {
+            TimeSpan timeSpan;
+            if (Status.StatusName == "zamknięte")
+            {
+                timeSpan = TimeClosed.Value - TimeCreated;
+            }
+            else if (Status.StatusName == "anulowane")
+            {
+                timeSpan = TimeSpan.Zero;
+            }
+            else
+            {
+                timeSpan = DateTime.Now - TimeCreated;
+            }
+            return timeSpan.Days+"d "+timeSpan.Hours+"h "+timeSpan.Minutes+"m "+timeSpan.Seconds+"s";
+        }
     }
 }

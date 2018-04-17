@@ -1,6 +1,4 @@
-﻿@model PagedList.IPagedList<helpdesk.Models.Order>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿@model helpdesk.Models.Order
 
 @{
     ViewBag.Title = "Raporty";
@@ -24,3 +22,22 @@
     }
 
 </table>
+
+@*@{ var itemsByStatus = this.ViewBag.OrdersByStatus as Dictionary<string, string>; }
+
+<table class="table table-responsive">
+
+    @foreach (var itemByStatus in itemsByStatus)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => itemByStatus.Key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => itemByStatus.Value)
+            </td>
+        </tr>
+    }
+
+</table>*@

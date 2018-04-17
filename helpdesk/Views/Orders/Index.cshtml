@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <div class="col-md-2">
                         @Html.DropDownList("CategoryId", null, "Kategoria", htmlAttributes: new { @class = "form-control" })
-                    </div>                   
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-2">
@@ -36,6 +36,11 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Wyszukaj" class="btn btn-outline-primary" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ActionLink("Pokaż wszystko", "Index", null, htmlAttributes: new { @class = "btn btn-outline-secondary" })
                     </div>
                 </div>
             </div>

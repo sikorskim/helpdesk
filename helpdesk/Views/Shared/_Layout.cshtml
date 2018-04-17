@@ -11,7 +11,7 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
             <img src="~/Content/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Helpdesk
+            Helpdesk
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -56,10 +56,12 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Departament Informatyki</p>
-        </footer>
+        <div class="sticky-footer">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Departament Informatyki</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

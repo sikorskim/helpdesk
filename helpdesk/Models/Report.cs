@@ -35,5 +35,33 @@ namespace helpdesk.Models
             Items.Add(key0,value0);
             return Items;
         }
+
+        public Dictionary<string, string> OrdersByStatus()
+        {
+            Name = "Ilość zgłoszeń w wybranym okresie wg statusu";
+            string[] statusName = db.Status.Select(p => p.StatusName).ToArray();
+
+            foreach (string s in statusName)
+            {
+                string value = db.Orders.Where(p=>p.Status.StatusName==s).Count().ToString();
+                Items.Add(s, value);
+            }
+
+            return Items;
+        }
+
+        public Dictionary<string, string> OrdersByCategory()
+        {
+            Name = "Ilość zgłoszeń w wybranym okresie wg kategorii";
+            string[] categoryName = db.Categories.Select(p => p.CategoryName).ToArray();
+
+            foreach (string s in categoryName)
+            {
+                string value = db.Orders.Where(p => p.Category.CategoryName == s).Count().ToString();
+                Items.Add(s, value);
+            }
+
+            return Items;
+        }
     }
 }

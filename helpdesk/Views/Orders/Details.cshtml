@@ -21,6 +21,9 @@
                 @Html.DisplayNameFor(model => model.Order.Status)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Order.Urgent)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Order.UserName)
             </th>
             <th>
@@ -30,7 +33,7 @@
                 @Html.DisplayNameFor(model => model.Order.TimeClosed)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order.Urgent)
+                @Html.DisplayNameFor(model => model.Order.ServiceTime)
             </th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
             @Html.DisplayFor(model => model.Order.Status.StatusName)
         </td>
         <td>
+            @Html.DisplayFor(model => model.Order.Urgent)
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Order.UserName)
         </td>
         <td>
@@ -58,7 +64,7 @@
             @Html.DisplayFor(model => model.Order.TimeClosed)
         </td>
         <td>
-            @Html.DisplayFor(model => model.Order.Urgent)
+            @Html.DisplayFor(model => model.Order.ServiceTime)
         </td>
         </trclass="@rowTheme">
 </table>
